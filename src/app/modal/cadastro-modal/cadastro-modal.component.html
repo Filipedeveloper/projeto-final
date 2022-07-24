@@ -1,0 +1,63 @@
+
+<h2 mat-dialog-title>Nova Movimentação</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="example-container">
+
+
+
+      <p >
+        <mat-form-field appearance="fill">
+          <mat-label>Data</mat-label>
+          <input matInput [matDatepicker]="picker" >
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </p>
+
+  <mat-grid-list cols="1" rowHeight="2:1">
+
+
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Correntista</mat-label>
+      <mat-select matNativeControl required [(ngModel)]="correntista">
+        <mat-option  *ngFor="let item of correntistas" [value]="item.id" >{{ item.cpf }} - {{ item.nome }}</mat-option>
+
+      </mat-select>
+    </mat-form-field>
+
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo de movimetação</mat-label>
+      <mat-select matNativeControl required [(ngModel)]="tipo">
+        <mat-option value="RECEITA">RECEITA</mat-option>
+        <mat-option value="DESPESA">DESPESA</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <p>
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Descrição</mat-label>
+        <input matInput placeholder="Informe uma descrição" [(ngModel)]="descricao">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Valor</mat-label>
+        <input matInput placeholder="R$0.00" [(ngModel)]="valor" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+      </mat-form-field>
+    </p>
+  </mat-grid-list>
+
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button [mat-dialog-close]="true" (click)="save()" cdkFocusInitial>Registrar</button>
+</mat-dialog-actions>
+
+
+
